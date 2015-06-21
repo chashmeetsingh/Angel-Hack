@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, except:[:index,:create]
   # GET /books
   # GET /books.json
   def index
@@ -24,7 +24,9 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = Book.new(book_params)
+    p = book_params
+    p[:user_id] = current_user.id
+    @book = Book.new(p)
 
     respond_to do |format|
       if @book.save
@@ -61,6 +63,11 @@ class BooksController < ApplicationController
     end
   end
 
+  def search
+    @sear = Book.all
+    @sea = params[:sea]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
@@ -69,6 +76,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params[:book]
+      params.require(:book).permit(:title, :image, :isbn, :author, :pages, :owner, :phone_no,:sea,:publisher)
     end
 end

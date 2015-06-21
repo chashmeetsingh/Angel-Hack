@@ -2,7 +2,7 @@ development:
   adapter: postgresql
   encoding: unicode
   host: localhost
-  database: book_development
+  database: app_development
   pool: 5
   username: root
   password: pass
@@ -11,7 +11,7 @@ test:
   adapter: postgresql
   encoding: unicode
   host: localhost
-  database: book_test
+  database: app_test
   pool: 5
   username: root
   password: pass
@@ -20,7 +20,7 @@ production:
   adapter: postgresql
   encoding: unicode
   host: localhost
-  database: book_production
+  database: app_production
   pool: 5
   username: root
   password: pass
